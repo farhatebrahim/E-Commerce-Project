@@ -14,5 +14,11 @@ pipeline {
                 sh 'docker build -t ecommerce-backend:${BUILD_NUMBER} ./backend'
             }
         }
+
+        stage('Security Scan') {
+            steps {
+                sh 'trivy image --severity HIGH,CRITICAL ecommerce-backend:${BUILD_NUMBER}'
+            }
+        }
     }
 }
