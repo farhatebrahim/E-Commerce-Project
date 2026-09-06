@@ -1,0 +1,16 @@
+---
+- name: Configure Backend Monitoring
+  hosts: backend_servers
+  become: true
+
+  roles:
+    - node_exporter
+    - cadvisor
+
+- name: Configure Prometheus Server
+  hosts: monitoring_servers
+  become: true
+
+  roles:
+    - prometheus
+    - grafana
